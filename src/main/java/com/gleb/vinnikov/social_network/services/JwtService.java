@@ -1,7 +1,6 @@
 package com.gleb.vinnikov.social_network.services;
 
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
@@ -11,17 +10,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
-import java.util.Base64;
 import java.util.Date;
 
 @Service
 public class JwtService {
 
     private final Key key;
+    private final long expirationMillis;
 
     public JwtService(
-            @Value("${application.security.jwt.secret-key}") String secret) {
+            @Value("${application.security.jwt.secret-key}") String secret,
+            @Value("${}") long expirationMillis) {
         key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
+        this.expirationMillis = expirationMillis;
     }
 
     public String generateAccessToken(UserDetails userDetails) {
