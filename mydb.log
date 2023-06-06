@@ -1,4 +1,6 @@
 /*C12*/SET SCHEMA PUBLIC
 SET SCHEMA "PUBLIC"
-INSERT INTO USERS VALUES('38e712f187574095947706c174244323','p@o.i','1','io')
+drop table if exists users cascade 
+create table users (id binary(16) not null, email varchar(255) not null, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null, primary key (id))
+INSERT INTO USERS VALUES('b2c2864f18094dd2a68f32ca19011d0c','p@o.i','$2a$10$Tiq5jSjGf6XeOiAfMXWfn.CohxSqp6MI/4c97M2JRjIhDDoGcKFjO','USER','io')
 COMMIT

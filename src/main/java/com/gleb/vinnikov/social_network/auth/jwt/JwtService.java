@@ -1,10 +1,12 @@
-package com.gleb.vinnikov.social_network.services;
+package com.gleb.vinnikov.social_network.auth.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class JwtService {
 
     public JwtService(
             @Value("${application.security.jwt.secret-key}") String secret,
-            @Value("${}") long expirationMillis) {
+            @Value("${application.security.jwt.expiration-millis}") long expirationMillis) {
         key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
         this.expirationMillis = expirationMillis;
     }
@@ -34,11 +36,12 @@ public class JwtService {
                 .compact();
     }
 
-    private Claims getClaims(String token) {
+    public Claims getClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
+
 }

@@ -1,4 +1,4 @@
-package com.gleb.vinnikov.social_network.services;
+package com.gleb.vinnikov.social_network.auth.services;
 
 import com.gleb.vinnikov.social_network.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
