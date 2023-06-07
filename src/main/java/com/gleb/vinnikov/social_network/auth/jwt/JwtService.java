@@ -7,6 +7,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,11 @@ public class JwtService {
         this.expirationMillis = expirationMillis;
     }
 
-    public String generateAccessToken(UserDetails userDetails) {
+    public String generateAccessToken(@NonNull UserDetails userDetails) {
+        String username = userDetails.getUsername();
+        if (username == null) {
+            throw new IllegalArgumentException("Given user details have null username.");
+        }
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -36,7 +41,7 @@ public class JwtService {
                 .compact();
     }
 
-    public Claims getClaims(String token) {
+    public Claims getClaims(@NonNull String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()

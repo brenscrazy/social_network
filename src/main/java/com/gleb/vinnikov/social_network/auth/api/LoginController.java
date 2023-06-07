@@ -8,6 +8,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -16,15 +17,15 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping("/registration")
+    @PostMapping(value = "/registration", consumes = "application/json", produces = "application/json")
     public ResponseEntity<LoginResponse> registration(
-            RegistrationRequest request) {
+            @RequestBody RegistrationRequest request) {
         return ResponseEntity.ok().body(loginService.registration(request));
     }
 
-    @PostMapping("/login")
+    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
     public ResponseEntity<LoginResponse> login(
-            LoginRequest request) {
+            @RequestBody LoginRequest request) {
         return ResponseEntity.ok().body(loginService.login(request));
     }
 
