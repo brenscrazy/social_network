@@ -18,6 +18,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepo.findFirstByUsername(username).orElseThrow(() -> new IllegalArgumentException("No user with ")); // TODO: 05.06.2023 readable error
+        return userRepo.findFirstByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No user with ")); // TODO: 05.06.2023 readable error
     }
 }

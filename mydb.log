@@ -1,7 +1,9 @@
 /*C12*/SET SCHEMA PUBLIC
 SET SCHEMA "PUBLIC"
 drop table if exists users cascade 
-create table users (id binary(16) not null, email varchar(255) not null, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null, primary key (id))
+create table users (id binary(16) not null, email varchar(255) not null unique, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
+INSERT INTO USERS VALUES('5f83bfe2da204775bbf2f45a775e8d89','olol@k.k','$2a$10$krVKeWL4w8nKxpx2fVIn9eawjfKPs/Fz4iJqFjM1eoNIOnFs8fcv2','USER','sldkfjskdlf')
+COMMIT
 drop table if exists users cascade 
 DISCONNECT
 /*C13*/SET SCHEMA PUBLIC
@@ -22,3 +24,31 @@ DISCONNECT
 DISCONNECT
 /*C21*/SET SCHEMA PUBLIC
 DISCONNECT
+/*C22*/SET SCHEMA PUBLIC
+SET SCHEMA "PUBLIC"
+drop table if exists users cascade 
+create table users (id binary(16) not null, email varchar(255) not null unique, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
+drop table if exists users cascade 
+DISCONNECT
+/*C23*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C24*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C25*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C26*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C27*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C28*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C29*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C30*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C31*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C32*/SET SCHEMA PUBLIC
+SET SCHEMA "PUBLIC"
+drop table if exists users cascade 
+create table users (id binary(16) not null, email varchar(255) not null unique, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
