@@ -6,11 +6,15 @@ import java.util.function.Supplier;
 
 public class ExceptionUtils {
 
+    public static String retrieveErrorMessage(String messageProperty) {
+        ResourceBundle bundle = ResourceBundle.getBundle("messages");
+        return bundle.getString(messageProperty);
+    }
+
     public static void throwIllegalArgumentException(
             String messageProperty,
             Object... args) {
-        ResourceBundle bundle = ResourceBundle.getBundle("messages");
-        String message = bundle.getString(messageProperty);
+        String message = retrieveErrorMessage(messageProperty);
         throw new IllegalArgumentException(MessageFormat.format(message, args));
     }
 
