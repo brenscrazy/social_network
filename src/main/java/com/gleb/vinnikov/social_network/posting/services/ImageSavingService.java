@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UncheckedIOException;
 import java.nio.file.*;
 import java.util.Objects;
 import java.util.UUID;
@@ -29,21 +30,25 @@ public class ImageSavingService {
     private final Path imageSavingDirectory;
     private final ImageRepo imageRepo;
 
-    public String saveImage(MultipartFile image) throws FileUploadException {
+    public Image saveImage(MultipartFile image) {
+        validate(image);
+        String newFileName = generateFileName();
+        Path savingFile = imageSavingDirectory.resolve(newFileName);
+        try (InputStream inputStream = image.getInputStream()) {
+            Files.copy(inputStream, savingFile);
+        } catch (IOException e) {
+            throw new UncheckedIOException(retrieveErrorMessage("posting.image.saving.io.error"), e);
+        }
+        return imageRepo.save(Image.builder().imagePath(savingFile.toString()).build());
+    }
+
+    private void validate(MultipartFile image) {
         if (!Objects.equals(image.getContentType(), "image/jpeg")) {
             throwIllegalArgumentException("posting.image.saving.wrong.format");
         }
         if (image.isEmpty()) {
             throwIllegalArgumentException("posting.image.saving.empty.file");
         }
-        String newFileName = generateFileName();
-        Path savingFile = imageSavingDirectory.resolve(newFileName);
-        try (InputStream inputStream = image.getInputStream()) {
-            Files.copy(inputStream, savingFile);
-        } catch (IOException e) {
-            throw new FileUploadException(retrieveErrorMessage("posting.image.saving.io.error"), e);
-        }
-        imageRepo.save(Image.builder().imagePath(savingFile.toString()).build());
     }
 
     private String generateFileName() {

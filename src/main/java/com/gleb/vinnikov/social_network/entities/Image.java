@@ -1,10 +1,7 @@
 package com.gleb.vinnikov.social_network.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import java.nio.file.Path;
 import java.util.UUID;
@@ -13,6 +10,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter @Setter
 public class Image {
 
     @Id
@@ -22,12 +20,6 @@ public class Image {
     @Column(nullable = false)
     private String imagePath;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
-    @Id
-    public UUID getId() {
-        return id;
-    }
+
 }

@@ -13,9 +13,7 @@ import java.util.Optional;
 @Data
 public class PostingRequest {
 
-    @NotNull(message = "header field is missing")
     private final String header;
-    @NotNull(message = "postText field is missing")
     private final String postText;
     private final MultipartFile image;
 

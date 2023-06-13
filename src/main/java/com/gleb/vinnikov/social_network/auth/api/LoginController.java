@@ -4,6 +4,7 @@ import com.gleb.vinnikov.social_network.auth.services.LoginService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -20,13 +21,19 @@ public class LoginController {
 
     private final LoginService loginService;
 
-    @PostMapping(value = "/registration", consumes = "application/json", produces = "application/json")
+    @PostMapping(
+            value = "/registration",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginResponse> registration(
             @Valid @RequestBody RegistrationRequest request) {
         return ResponseEntity.ok().body(loginService.registration(request));
     }
 
-    @PostMapping(value = "/login", consumes = "application/json", produces = "application/json")
+    @PostMapping(
+            value = "/login",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<LoginResponse> login(
             @Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok().body(loginService.login(request));

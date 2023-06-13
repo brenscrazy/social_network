@@ -19,5 +19,10 @@
       "name": "application.user.username-regexp",
       "type": "java.lang.String",
       "description": "Regular expression that is used to check users' usernames for correctness."
+    },
+    {
+      "name": "application.posing.header.max-length",
+      "type": "java.lang.Integer",
+      "description": "Maximum length of post's header."
     }
   ] }

@@ -1,30 +1,28 @@
 package com.gleb.vinnikov.social_network.entities;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.UUID;
 
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@Getter @Setter
 public class Post {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false)
     private UUID id;
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "authorId")
     private User author;
     private String header;
     private String postText;
-    private UUID imageId;
+    @OneToOne
+    @JoinColumn(name = "imageId")
+    private Image image;
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
-    @Id
-    @GeneratedValue
-    public UUID getId() {
-        return id;
-    }
 }

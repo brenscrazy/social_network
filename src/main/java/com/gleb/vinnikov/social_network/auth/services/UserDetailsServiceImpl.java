@@ -1,5 +1,6 @@
 package com.gleb.vinnikov.social_network.auth.services;
 
+import com.gleb.vinnikov.social_network.entities.User;
 import com.gleb.vinnikov.social_network.repos.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +18,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public User loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.findFirstByUsername(username).orElseThrow(() -> new UsernameNotFoundException("No user with ")); // TODO: 05.06.2023 readable error
     }
 }

@@ -1,54 +1,27 @@
 /*C12*/SET SCHEMA PUBLIC
 SET SCHEMA "PUBLIC"
+drop table if exists image cascade 
+drop table if exists post cascade 
 drop table if exists users cascade 
+create table image (id binary(16) not null, image_path varchar(255) not null, primary key (id))
+create table post (author_id binary(16), id binary(16) not null, image_id binary(16) unique, header varchar(255), post_text varchar(255), primary key (id))
 create table users (id binary(16) not null, email varchar(255) not null unique, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
-INSERT INTO USERS VALUES('5f83bfe2da204775bbf2f45a775e8d89','olol@k.k','$2a$10$krVKeWL4w8nKxpx2fVIn9eawjfKPs/Fz4iJqFjM1eoNIOnFs8fcv2','USER','sldkfjskdlf')
+alter table post add constraint FK1mpebp1ayl0twrwm7ruiof778 foreign key (author_id) references users
+alter table post add constraint FKqbitxio9e3gwkkkhjhtntf16v foreign key (image_id) references image
+INSERT INTO USERS VALUES('a5ddfd792ba548ce958662d7a4392536','p@o.i','$2a$10$eDWjCCvy79I0ao.cVnFTE.HYZ59CJ8/XIjFPT.DiDNcAjoWKcid2u','USER','brens')
 COMMIT
-drop table if exists users cascade 
+INSERT INTO POST VALUES('a5ddfd792ba548ce958662d7a4392536','0e87e18b495041bd8acd4091bdd31d49',NULL,'ololo',NULL)
+COMMIT
+INSERT INTO POST VALUES('a5ddfd792ba548ce958662d7a4392536','845d80593c8445f1b8b971a9a17c2246',NULL,'ololo',NULL)
+COMMIT
+/*C15*/SET SCHEMA PUBLIC
+DISCONNECT
+/*C12*/DISCONNECT
+/*C18*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C13*/SET SCHEMA PUBLIC
 DISCONNECT
 /*C14*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C15*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C16*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C17*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C18*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C19*/SET SCHEMA PUBLIC
-DISCONNECT
 /*C20*/SET SCHEMA PUBLIC
 DISCONNECT
-/*C21*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C22*/SET SCHEMA PUBLIC
-SET SCHEMA "PUBLIC"
-drop table if exists users cascade 
-create table users (id binary(16) not null, email varchar(255) not null unique, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
-drop table if exists users cascade 
-DISCONNECT
-/*C23*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C24*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C25*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C26*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C27*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C28*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C29*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C30*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C31*/SET SCHEMA PUBLIC
-DISCONNECT
-/*C32*/SET SCHEMA PUBLIC
-SET SCHEMA "PUBLIC"
-drop table if exists users cascade 
-create table users (id binary(16) not null, email varchar(255) not null unique, password varchar(255) not null, role varchar(255) not null check (role in ('USER','ADMIN')), username varchar(255) not null unique, primary key (id))
